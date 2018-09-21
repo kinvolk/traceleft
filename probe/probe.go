@@ -261,6 +261,7 @@ func New(cacheSize int) (*Probe, error) {
 	}
 	reader := bytes.NewReader(buf)
 	globalBPF := elflib.NewModuleFromReader(reader)
+	globalBPF.EnableOptionCompatProbe()
 
 	if err := globalBPF.Load(nil); err != nil {
 		return nil, fmt.Errorf("error loading global BPF: %v", err)
